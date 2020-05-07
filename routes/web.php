@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/obras/{WorkOfArt:slug}', 'WorkOfArtController@show')->name('work-of-art');
 
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(static function () {
+    Route::get('/', 'AdminController@index')->name('home');
+    Route::resource('works-of-arts', 'WorkOfArtController')->only(['store']);
+});

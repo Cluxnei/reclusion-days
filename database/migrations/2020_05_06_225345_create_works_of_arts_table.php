@@ -15,6 +15,7 @@ class CreateWorksOfArtsTable extends Migration
     {
         Schema::create('works_of_arts', static function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('title')->default('untitled');
             $table->text('description')->nullable();
             $table->string('author');

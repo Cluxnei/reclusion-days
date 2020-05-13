@@ -3948,6 +3948,49 @@ body.is-preload #sidebar nav ul li {
     max-width: 100%;
 }
 
+.language-switcher {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.language-switcher a {
+    padding: 0;
+}
+
+.language-switcher .active {
+    color: #fff !important;
+}
+
+.mobile-language-switcher {
+    display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+@media only screen and (max-width: 736px) {
+    .mobile-language-switcher {
+        display: flex;
+    }
+    .mobile-language-switcher span {
+        margin-left: 50px;
+    }
+    .mobile-language-switcher .language-switcher a {
+        padding: 15px !important;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .language-switcher {
+        display: flex !important;
+        padding: 0 15px !important;
+    }
+    .language-switcher a {
+        padding: 0 10px !important;
+    }
+}
+
 @media only screen and (max-width: 780px) {
     .team {
         flex-basis: 100%;

@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\WorkOfArt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 class WorkOfArtController extends Controller
 {
+    public function __construct()
+    {
+        $language = session()->get('language', 'en');
+        App::setLocale($language);
+        app()->setLocale($language);
+    }
     public function show(WorkOfArt $workOfArt)
     {
         return response()->view('work-of-art', compact('workOfArt'));

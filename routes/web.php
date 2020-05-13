@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SetLanguage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/language/{language}', 'LanguageController@change')->name('language');
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/obras/{WorkOfArt:slug}', 'WorkOfArtController@show')->name('work-of-art');
-
+Route::get('/obras/{WorkOfArt}', 'WorkOfArtController@show')->name('work-of-art');
 Auth::routes();
-
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(static function () {
     Route::get('/', 'AdminController@index')->name('home');
     Route::resource('works-of-arts', 'WorkOfArtController')->only(['store']);

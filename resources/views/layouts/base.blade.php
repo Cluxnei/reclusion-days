@@ -1,4 +1,9 @@
+{{
+    app()->setLocale(session()->get('language', config('app.locale')))
+}}
+
 <!DOCTYPE HTML>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <title>@lang('messages.title')</title>
@@ -15,6 +20,16 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
+
+    <section class="mobile-language-switcher">
+        <span class="text-capitalize">@lang('messages.choose-language')</span>
+        <div class="language-switcher">
+            <a href="{{ route('language', 'en') }}" class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">EN</a>
+            <a href="{{ route('language', 'es') }}" class="{{ app()->getLocale() === 'es' ? 'active' : '' }}">ES</a>
+            <a href="{{ route('language', 'ge') }}" class="{{ app()->getLocale() === 'ge' ? 'active' : '' }}">GE</a>
+            <a href="{{ route('language', 'pt-br') }}" class="{{ app()->getLocale() === 'pt-br' ? 'active' : '' }}">PT</a>
+        </div>
+    </section>
 
     @yield('content')
 

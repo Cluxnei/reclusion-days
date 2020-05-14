@@ -69,46 +69,49 @@
 
             })
             .each(function () {
+                try {
+                    var $this = $(this),
+                        id = $this.attr('href'),
+                        $section = $(id);
 
-                var $this = $(this),
-                    id = $this.attr('href'),
-                    $section = $(id);
+                    // No section for this link? Bail.
+                    if ($section.length < 1)
+                        return;
 
-                // No section for this link? Bail.
-                if ($section.length < 1)
-                    return;
+                    // Scrollex.
+                    $section.scrollex({
+                        mode: 'middle',
+                        top: '-20vh',
+                        bottom: '-20vh',
+                        initialize: function () {
 
-                // Scrollex.
-                $section.scrollex({
-                    mode: 'middle',
-                    top: '-20vh',
-                    bottom: '-20vh',
-                    initialize: function () {
+                            // Deactivate section.
+                            $section.addClass('inactive');
 
-                        // Deactivate section.
-                        $section.addClass('inactive');
+                        },
+                        enter: function () {
 
-                    },
-                    enter: function () {
+                            // Activate section.
+                            $section.removeClass('inactive');
 
-                        // Activate section.
-                        $section.removeClass('inactive');
+                            // No locked links? Deactivate all links and activate this section's one.
+                            if ($sidebar_a.filter('.active-locked').length == 0) {
 
-                        // No locked links? Deactivate all links and activate this section's one.
-                        if ($sidebar_a.filter('.active-locked').length == 0) {
+                                $sidebar_a.removeClass('active');
+                                $this.addClass('active');
 
-                            $sidebar_a.removeClass('active');
-                            $this.addClass('active');
+                            }
+
+                            // Otherwise, if this section's link is the one that's locked, unlock it.
+                            else if ($this.hasClass('active-locked'))
+                                $this.removeClass('active-locked');
 
                         }
+                    });
 
-                        // Otherwise, if this section's link is the one that's locked, unlock it.
-                        else if ($this.hasClass('active-locked'))
-                            $this.removeClass('active-locked');
+                } catch (e) {
 
-                    }
-                });
-
+                }
             });
 
     }
@@ -186,5 +189,14 @@
 
             }
         });
+
+        setTimeout(() => {
+            $('img[data-image]').each((_, e) => {
+                const data = e.getAttribute('data-image');
+                if (data !== e.src) {
+                    e.src = data;
+                }
+            });
+        }, 1000);
 
 })(jQuery);

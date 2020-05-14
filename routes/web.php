@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/language/{language}', 'LanguageController@change')->name('language');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/obras/{WorkOfArt}', 'WorkOfArtController@show')->name('work-of-art');
+Route::get('/download/{lang}', 'HomeController@download')->name('download');
 Auth::routes();
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(static function () {
     Route::get('/', 'AdminController@index')->name('home');

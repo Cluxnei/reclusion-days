@@ -11,7 +11,7 @@
                 <p>
                     @lang('messages.regulation-description')
                 </p>
-                <a href="#" class="button primary icon solid fa-eye download-button">
+                <a href="{{ asset(__('images.regulation')) }}" class="button primary icon solid fa-eye download-button">
                     @lang('messages.read')
                 </a>
             </section>
@@ -21,7 +21,7 @@
                 <p>
                     @lang('messages.cession-of-authoral-rights-description')
                 </p>
-                <a href="#" class="button primary icon solid fa-download download-button">
+                <a href="{{ route('download', app()->getLocale()) }}" class="button primary icon solid fa-download download-button">
                     @lang('messages.download')
                 </a>
             </section>
